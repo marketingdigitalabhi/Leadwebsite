@@ -21,7 +21,7 @@ creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPE)
 client = gspread.authorize(creds)
 
 # Replace with your Google Sheet ID
-SHEET_ID = "YOUR_SHEET_ID"
+SHEET_ID = "1CswGuv2YzM0ezHvnA6vakwyjyZTdsSoiWMlUX7oPfMU"
 sheet = client.open_by_key(SHEET_ID).sheet1
 
 @app.route("/api/data")
