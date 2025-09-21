@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Sheet Data</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h2>Google Sheet Data</h2>
+  <table id="data-table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function fetchData() {
+      const res = await fetch("/api/data");
+      const data = await res.json();
+
+      if (data.length > 0) {
+        let tableHead = "<tr>";
+        Object.keys(data[0]).forEach(key => {
+          tableHead += `<th>${key}</th>`;
+        });
+        tableHead += "</tr>";
+        document.querySelector("#data-table thead").innerHTML = tableHead;
+
+        let tableBody = "";
+        data.forEach(row => {
+          tableBody += "<tr>";
+          Object.values(row).forEach(val => {
+            tableBody += `<td>${val}</td>`;
+          });
+          tableBody += "</tr>";
+        });
+        document.querySelector("#data-table tbody").innerHTML = tableBody;
+      }
+    }
+    fetchData();
+  </script>
+</body>
+</html>
